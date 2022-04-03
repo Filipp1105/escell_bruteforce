@@ -58,4 +58,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-time.sleep(30)
+
+print("Bye")
+time.sleep(50)
+
