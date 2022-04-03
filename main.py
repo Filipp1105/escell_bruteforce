@@ -4,6 +4,7 @@ import win32com.client as client
 from datetime import datetime
 import time
 
+print("Version 1.0")
 
 def brute_excel_doc():
     print('***Hello friend!***')
