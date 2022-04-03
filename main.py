@@ -7,7 +7,7 @@ import time
 print('Version 1.0 \nMade by Fengwuu')
 
 def brute_excel_doc():
-    print('***Hello friend!***')
+    print('****Hello friend!****')
 
     try:
         dir_file = input('Enter file directory')
