@@ -6,16 +6,17 @@ import time
 
 
 def brute_excel_doc():
-    print("***Hello friend!***")
+    print('***Hello friend!***')
 
     try:
-        password_length = input("Введите длину пароля, от скольки - до скольки символов, например 3 - 7: ")
+        dir_file = input('Enter file directory')
+        password_length = input('Enter the approximate length of the password, for example 6-7: ')
         password_length = [int(item) for item in password_length.split("-")]
     except:
-        print("Проверьте введенные данные")
+        print('Check input')
 
-    print("Если пароль содержит только цифры, введите: 1\nЕсли пароль содержит только буквы, введите: 2\n"
-          "Если пароль содержит цифры и буквы введите: 3\nЕсли пароль содержит цифры, буквы и спецсимволы введите: 4")
+    print('If password contains digits, press : 1\nIf password contains letters, press: 2\n'
+          'If password contains digits and letters,press: 3\nIf password contains digits,letters and symbols,press: 4')
 
     try:
         choice = int(input(": "))
@@ -28,40 +29,26 @@ def brute_excel_doc():
         elif choice == 4:
             possible_symbols = digits + ascii_letters + punctuation
         else:
-            possible_symbols = "O.o что ты хочешь сынок?"
-        # print(possible_symbols)
+            possible_symbols = 'Check input'
     except:
-        print("O.o что ты хочешь сынок?")
+        print("Check input")
 
-    # brute excel doc
     start_timestamp = time.time()
-    print(f"Started at - {datetime.utcfromtimestamp(time.time()).strftime('%H:%M:%S')}")
-
     count = 0
-    for pass_length in range(password_length[0], password_length[1] + 1):
+    for pass_length in range(password_length[0], password_length[1] + 1):  # starting
         for password in itertools.product(possible_symbols, repeat=pass_length):
             password = "".join(password)
-            # print(password)
-
-            opened_doc = client.Dispatch("Excel.Application")
+            opened_doc = client.Dispatch('Excel.Application')
             count += 1
-
             try:
-                opened_doc.Workbooks.Open(
-                    r"C:\Users\User\PycharmProjects\brute_excel\fsociety.xlsx",
-                    False,
-                    True,
-                    None,
-                    password
-                )
-
+                opened_doc.Workbooks.Open(  # opening file
+                    dir_file, False, True, None, password)
                 time.sleep(0.1)
                 print(f"Finished at - {datetime.utcfromtimestamp(time.time()).strftime('%H:%M:%S')}")
-                print(f"Password cracking time - {time.time() - start_timestamp}")
-
-                return f"Attempt #{count} Password is: {password}"
+                print(f'Password cracking time - {time.time() - start_timestamp}')
+                return f'Attempt #{count} Password is: {password}'
             except:
-                print(f"Attempt #{count} Incorrect password: {password}")
+                print(f'Attempt #{count} Incorrect password: {password}')
                 pass
 
 
@@ -71,3 +58,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+time.sleep(30)
